@@ -494,23 +494,46 @@ const GenerateTimetable = () => {
         }
       );
 
-      // Check if the request was successful
+      // Always read the response body once
+      const responseData = await response.json();
+
       if (response.ok) {
-        const dataApi = await response.json();
-        console.log("dataaa", dataApi);
-
-        // Use toast to display the success message
-        toast.success(dataApi.message || "Data successfully submitted!");
-
-        // Call resetForm to clear the fields
+        // ✅ CASE 1: Timetable created successfully
+        toast.success(
+          responseData.message || "✅ Timetable created successfully!"
+        );
         resetForm();
-      } else {
-        // Handle case where the request was not successful
-        const errorData = await response.json();
+      } else if (response.status === 400) {
+        // ❌ CASE 2: Conflict detected (handled by backend)
         toast.error(
-          errorData.message || "Something went wrong. Please try again."
+          responseData.message ||
+            "⚠️ A conflict was detected in this time slot!"
+        );
+      } else {
+        // ⚠️ CASE 3: Other backend errors (not specifically conflict)
+        toast.error(
+          responseData.message ||
+            "❌ Failed to create timetable. Please try again."
         );
       }
+
+      // // Check if the request was successful
+      // if (response.ok) {
+      //   const dataApi = await response.json();
+      //   console.log("dataaa", dataApi);
+
+      //   // Use toast to display the success message
+      //   toast.success(dataApi.message || "Data successfully submitted!");
+
+      //   // Call resetForm to clear the fields
+      //   resetForm();
+      // } else {
+      //   // Handle case where the request was not successful
+      //   const errorData = await response.json();
+      //   toast.error(
+      //     errorData.message || "Something went wrong. Please try again."
+      //   );
+      // }
     } catch (error) {
       console.error("Error:", error);
     }
@@ -528,14 +551,14 @@ const GenerateTimetable = () => {
   const handleStartTimeChange = (newValue) => {
     setData((prev) => ({
       ...prev,
-      start_time: newValue ? newValue.format("hh:mm A") : "",
+      start_time: newValue ? newValue.format("HH:mm A") : "",
     }));
   };
 
   const handleEndTimeChange = (newValue) => {
     setData((prev) => ({
       ...prev,
-      end_time: newValue ? newValue.format("hh:mm A") : "",
+      end_time: newValue ? newValue.format("HH:mm A") : "",
     }));
   };
 
