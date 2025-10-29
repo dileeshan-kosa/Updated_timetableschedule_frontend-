@@ -517,23 +517,6 @@ const GenerateTimetable = () => {
         );
       }
 
-      // // Check if the request was successful
-      // if (response.ok) {
-      //   const dataApi = await response.json();
-      //   console.log("dataaa", dataApi);
-
-      //   // Use toast to display the success message
-      //   toast.success(dataApi.message || "Data successfully submitted!");
-
-      //   // Call resetForm to clear the fields
-      //   resetForm();
-      // } else {
-      //   // Handle case where the request was not successful
-      //   const errorData = await response.json();
-      //   toast.error(
-      //     errorData.message || "Something went wrong. Please try again."
-      //   );
-      // }
     } catch (error) {
       console.error("Error:", error);
     }
