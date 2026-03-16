@@ -176,8 +176,6 @@ timetableschedule_backend/
 └── package-lock.json
 ```
 
-*(Note: Component and controller files have been abbreviated for brevity).*
-
 ## 8. Local Setup & Installation
 
 **Prerequisites:** Node.js installed, and a running MongoDB instance (local or MongoDB Atlas).
