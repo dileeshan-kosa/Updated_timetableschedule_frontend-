@@ -1,7 +1,7 @@
 
 ---
 
-# Smart University Timetable Management System
+# 🗓️ The Scheduler - Smart University Timetable Management System
 
 > **Repository Links:**
 > * ⚙️ **Backend Repository:** [Backend Repository](https://github.com/dileeshan-kosa/Updated_timetableschedule_backend.git)
