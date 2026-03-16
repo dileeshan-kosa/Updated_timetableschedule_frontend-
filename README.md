@@ -1,70 +1,220 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+# Smart University Timetable Management System
 
-In the project directory, you can run:
+> **Repository Links:**
+> * ⚙️ **Backend Repository:** [Backend Repository](https://github.com/dileeshan-kosa/Updated_timetableschedule_backend.git)
+> * 🖥️ **Frontend Repository:** [Frontend Repository](https://github.com/dileeshan-kosa/Updated_timetableschedule_frontend-.git)
 
-### `yarn start`
+## 1. Project Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The Smart University Timetable Management System is a comprehensive, Role-Based Access Control (RBAC) web application designed to streamline academic scheduling. Built using the MERN stack, it serves as a centralized hub where administrators can securely create and manage users, map academic modules to lecturers, allocate physical lecture halls, and generate dynamic timetables. The system utilizes a custom backend algorithm to prevent scheduling overlaps and leverages real-time sockets to instantly notify students and lecturers of any timetable changes.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 2. Core Features
 
-### `yarn test`
+**🔒 Admin Privileges (Central Controller)**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* **User Management:** Create and securely store Lecturer and Student profiles (with password hashing).
+* **Academic Mapping:** Create dynamic links between Faculties, Departments, Modules, and specific Lecturers.
+* **Infrastructure Management:** Add buildings and individual lecture halls to the database.
+* **Timetable Generation:** Schedule lectures with intelligent dropdowns (e.g., selecting a module automatically fills in the assigned lecturer).
+* **Conflict Prevention:** The system actively rejects overlapping schedules for the same batch or hall.
 
-### `yarn build`
+**👨‍🏫 Lecturer Dashboard**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* **Personalized Calendar:** View only the lecture schedules directly assigned to them.
+* **Availability Submission:** Send specific available time slots and dates directly to the Admin prior to schedule generation.
+* **Change Requests:** Request timetable modifications (time, date, or hall) if conflicts arise.
+* **Student Feedback:** View anonymous module feedback submitted by enrolled students.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**🎓 Student Dashboard**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* **Dynamic Timetable:** A tailored calendar view showing only the lectures relevant to their specific Faculty, Department, and Batch.
+* **Real-Time Notifications:** Receive instant updates when a timetable is modified or rescheduled by the Admin.
+* **Module Feedback:** Submit constructive feedback for specific enrolled modules.
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**🛡️ Anti-Clashing Mechanism**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* Custom backend conflict prevention rejects overlapping schedules for the same batch, module, or lecture hall.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**📆 Calendar Views**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+* Students see lectures filtered dynamically by their department.
+* Lecturers see lectures filtered by their assigned module.
+* Integrated Ant Design Calendar with a Drawer component for detailed event info.
 
-## Learn More
+**💬 Feedback System**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+* Students can submit anonymous feedback for specific modules and their assigned lecturers.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**🔌 Real-Time Communication**
 
-### Code Splitting
+* Socket.IO integration for instant, real-time schedule updates and notifications.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 3. System Architecture
 
-### Analyzing the Bundle Size
+![System Architecture Diagram](./systemArchitecture.png) 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 4. Database Diagram (Entity Relationship)
 
-### Making a Progressive Web App
+![Database Diagram](./DatabaseDiagram.png) 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 5. Timetable Conflict Mechanism
 
-### Advanced Configuration
+To prevent scheduling chaos, the backend evaluates the requested `start_time` and `end_time` against existing records for the specific module and batch on that `lecture_date`. If the times overlap, the database operation is rejected before insertion.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+![Timetable Conflict Mechanism Diagram](./TimetableConflict.png) 
 
-### Deployment
+## 6. Tech Stack
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+| Category | Technologies |
+| --- | --- |
+| **Frontend UI/UX** | React.js (v18), Tailwind CSS, Material UI, Ant Design |
+| **State & Routing** | Redux Toolkit, React Router DOM |
+| **Backend Framework** | Node.js, Express.js |
+| **Database & ORM** | MongoDB, Mongoose |
+| **Security & Auth** | JSON Web Tokens (JWT), `bcryptjs`, HTTP-only cookies |
+| **Real-Time Comm.** | Socket.io, Socket.io-client |
 
-### `yarn build` fails to minify
+## 7. Project Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The project is separated into two repositories to maintain a clean architecture.
+
+```text
+
+### Frontend Repository
+timetableschedule_frontend/
+├── public/
+├── src/
+│   ├── assets/
+│   ├── common/
+│   ├── components/
+│   │   ├── Admin/
+│   │   │   ├── AdminDBHeader.jsx
+│   │   │   ├── AdminDBLeftSection.jsx
+│   │   │   ├── AdminDBRightSection.jsx
+│   │   │   ├── AdminDesignUiux.jsx
+│   │   │   ├── Example.jsx
+│   │   │   ├── GenerateTimetable.jsx
+│   │   │   ├── ManageLectureHalls.jsx
+│   │   │   ├── ManageLectures.jsx
+│   │   │   ├── ManageModule.jsx
+│   │   │   ├── ManageStudents.jsx
+│   │   │   ├── ManageTimeTable.jsx
+│   │   │   └── UpdateTimetable.jsx
+│   │   ├── Lecture/
+│   │   │   ├── LecAvailability.jsx
+│   │   │   ├── LecCalendar.jsx
+│   │   │   ├── LecFeedback.jsx
+│   │   │   ├── LecHeader.jsx
+│   │   │   ├── LecRequest.jsx
+│   │   │   ├── LectureDesignUiux.jsx
+│   │   │   ├── LecturerLeftSection.jsx
+│   │   │   ├── LecturerMyProfile.jsx
+│   │   │   ├── LecturerProfile.jsx
+│   │   │   └── LecturerRightSection.jsx
+│   │   ├── Student/
+│   │   │   ├── About.jsx
+│   │   │   ├── Footer.jsx
+│   │   │   ├── Home.jsx
+│   │   │   └── HomeHeader.jsx
+│   │   └── index.js
+│   ├── containers/
+│   │   ├── AdminDashboard.jsx
+│   │   ├── Dashboard.jsx
+│   │   ├── ForgotPassword.jsx
+│   │   ├── LecturerDashboard.jsx
+│   │   ├── Login.jsx
+│   │   ├── Main.jsx
+│   │   ├── SignUp.jsx
+│   │   └── index.js
+│   ├── context/
+│   ├── helpers/
+│   ├── store/
+│   ├── utils/
+│   ├── App.js
+│   ├── Styles.js
+│   ├── index.css
+│   └── index.js
+├── .gitignore
+├── package.json
+└── package-lock.json
+
+### Backend Repository
+timetableschedule_backend/
+├── config/
+├── controllers/
+│   ├── adminDetails.js
+│   ├── adminLogout.js
+│   ├── adminSignin.js
+│   ├── adminSignup.js
+│   ├── feedBackDetails.js
+│   ├── getCalender.js
+│   ├── managelectureHalls.js
+│   ├── manageLecturers.js
+│   ├── manageModules.js
+│   └── manageStudents.js
+├── middleware/
+│   └── authToken.js
+├── models/
+│   ├── adminModel.js
+│   ├── calenderTable.js
+│   ├── example.js
+│   ├── feedBack.js
+│   ├── lecturehall.js
+│   ├── lectureTable.js
+│   ├── moduleTable.js
+│   └── studentTable.js
+├── routes/
+│   └── index.js
+├── .env
+├── .gitignore
+├── index.js
+├── package.json
+└── package-lock.json
+```
+
+*(Note: Component and controller files have been abbreviated for brevity).*
+
+## 8. Local Setup & Installation
+
+**Prerequisites:** Node.js installed, and a running MongoDB instance (local or MongoDB Atlas).
+
+**Backend Setup:**
+
+1. Clone the backend repository.
+2. Run `npm install` to install dependencies.
+3. Create a `.env` file in the root directory with the following variables (adjust as needed):
+```env
+PORT=8000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+
+```
+
+
+4. Run `npm run dev` to start the backend server via Nodemon.
+
+**Frontend Setup:**
+
+1. Clone the frontend repository.
+2. Run `npm install` to install dependencies.
+3. If necessary, configure your Axios base URL to point to `http://localhost:8000`.
+4. Run `npm start` to launch the React development server.
+
+## 9. Future Enhancements
+
+* **Automated Generation:** Implement a genetic algorithm to auto-generate conflict-free timetables based on lecturer availability.
+* **Email Integration:** Add NodeMailer to send password reset links and schedule notifications directly to user emails.
+* **Analytics Dashboard:** Provide Admin charts showing lecture hall utilization rates and student feedback trends.
+* **Export to PDF/Excel:** Allow Admins to export generated timetables as downloadable PDF or Excel files.
+* **Audit Logging:** Track who created/modified each timetable entry with timestamps for accountability. 
+
+## 🧑‍💻 Author
+
+* [Dileeshan Kosala](https://github.com/dileeshan-kosa)
+
+---
+---
